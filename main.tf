@@ -103,3 +103,11 @@ resource "aws_sns_topic_policy" "example" {
 }
 POLICY
 }
+
+resource "aws_s3_bucket_notification" "example" {
+  bucket = aws_s3_bucket.example.id
+  topic {
+    topic_arn = aws_sns_topic.example.arn
+    events    = ["s3:ObjectCreated:*"]
+  }
+}
